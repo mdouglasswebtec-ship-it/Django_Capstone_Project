@@ -1,0 +1,29 @@
+{% extends "inventory/base.html" %}
+
+{% block content %}
+<h2>Restock Report</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Ingredient</th>
+            <th>Required for One Full Menu</th>
+            <th>In Stock</th>
+            <th>Shortfall</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in restock_rows %}
+        <tr>
+            <td>{{ row.ingredient.name }}</td>
+            <td>{{ row.required }}</td>
+            <td>{{ row.ingredient.quantity }}</td>
+            <td>{{ row.shortfall }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">All ingredients are sufficiently stocked.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

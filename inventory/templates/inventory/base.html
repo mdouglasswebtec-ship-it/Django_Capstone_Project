@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Django Delights</title>
+    <style>
+        body {
+            font-family: "Trebuchet MS", "Segoe UI", Arial, Helvetica, sans-serif;
+            margin: 0;
+            background: linear-gradient(180deg, #f5f7ff 0%, #f7f7f9 60%, #f0f5ff 100%);
+            color: #111827;
+        }
+        header {
+            background: #111827;
+            color: #ffffff;
+            padding: 16px 24px;
+        }
+        header h1 {
+            margin: 0 0 8px 0;
+            font-size: 1.5rem;
+            letter-spacing: 0.3px;
+        }
+        nav a {
+            color: #e5e7eb;
+            margin-right: 16px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            padding: 24px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background: #f3f4f6;
+        }
+        .card {
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 6px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+        }
+        .actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .button {
+            display: inline-block;
+            background: #1f2937;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .button.secondary {
+            background: #e5e7eb;
+            color: #111827;
+        }
+        .button.danger {
+            background: #b91c1c;
+        }
+        form .form-row {
+            margin-bottom: 12px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+        }
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Django Delights</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/ingredients/">Inventory</a>
+            <a href="/menu/">Menu</a>
+            <a href="/purchases/">Purchases</a>
+            <a href="/report/">Report</a>
+            <a href="/restock/">Restock</a>
+            {% if user.is_authenticated %}
+            <a href="/accounts/logout/">Log out</a>
+            {% else %}
+            <a href="/accounts/login/">Log in</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main>
+        {% if messages %}
+        <div class="card" style="margin-bottom: 16px;">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

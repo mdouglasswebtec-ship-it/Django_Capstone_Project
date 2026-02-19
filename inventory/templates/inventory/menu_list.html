@@ -1,0 +1,24 @@
+{% extends "inventory/base.html" %}
+
+{% block content %}
+<h2>Menu</h2>
+<p class="actions">
+    <a class="button" href="/menu/add/">Add Menu Item</a>
+    <a class="button secondary" href="/recipes/add/">Add Recipe Requirement</a>
+</p>
+{% for item in menu_items %}
+<div class="card" style="margin-bottom: 16px;">
+    <h3>{{ item.name }} - ${{ item.price }}</h3>
+    <strong>Recipe Requirements</strong>
+    <ul>
+        {% for requirement in item.recipe_requirements.all %}
+        <li>{{ requirement.quantity }} {{ requirement.ingredient.name }}</li>
+        {% empty %}
+        <li>No recipe requirements yet.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% empty %}
+<p>No menu items available.</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "inventory/base.html" %}
+
+{% block content %}
+<h2>Revenue Report</h2>
+<div class="card">
+    <p><strong>Total Revenue:</strong> ${{ total_revenue }}</p>
+    <p><strong>Total Cost:</strong> ${{ total_cost }}</p>
+    <p><strong>Profit:</strong> ${{ profit }}</p>
+</div>
+{% endblock %}

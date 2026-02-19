@@ -1,0 +1,13 @@
+{% extends "inventory/base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>{{ title }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Save</button>
+        <a class="button secondary" href="/purchases/">Cancel</a>
+    </form>
+</div>
+{% endblock %}
