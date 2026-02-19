@@ -1,10 +1,13 @@
 {% extends "inventory/base.html" %}
 
+{% block title %}{{ title }} | Django Delights{% endblock %}
+
 {% block content %}
 <div class="card">
     <h2>{{ title }}</h2>
     <form method="post">
         {% csrf_token %}
+        <p class="sr-only">All form fields are required unless marked optional.</p>
         {{ form.as_p }}
         <button class="button" type="submit">Save</button>
         <a class="button secondary" href="/ingredients/">Cancel</a>

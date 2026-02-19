@@ -1,5 +1,7 @@
 {% extends "inventory/base.html" %}
 
+{% block title %}Menu | Django Delights{% endblock %}
+
 {% block content %}
 <h2>Menu</h2>
 <p class="actions">
@@ -9,7 +11,7 @@
 {% for item in menu_items %}
 <div class="card" style="margin-bottom: 16px;">
     <h3>{{ item.name }} - ${{ item.price }}</h3>
-    <strong>Recipe Requirements</strong>
+    <h4>Recipe Requirements</h4>
     <ul>
         {% for requirement in item.recipe_requirements.all %}
         <li>{{ requirement.quantity }} {{ requirement.ingredient.name }}</li>

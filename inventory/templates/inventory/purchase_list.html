@@ -1,20 +1,23 @@
 {% extends "inventory/base.html" %}
 
+{% block title %}Purchases | Django Delights{% endblock %}
+
 {% block content %}
 <h2>Purchases</h2>
 <p><a class="button" href="/purchases/add/">Record Purchase</a></p>
 <table>
+    <caption class="sr-only">Recorded menu item purchases with price and timestamp.</caption>
     <thead>
         <tr>
-            <th>Menu Item</th>
-            <th>Price</th>
-            <th>Timestamp</th>
+            <th scope="col">Menu Item</th>
+            <th scope="col">Price</th>
+            <th scope="col">Timestamp</th>
         </tr>
     </thead>
     <tbody>
         {% for purchase in purchases %}
         <tr>
-            <td>{{ purchase.menu_item.name }}</td>
+            <th scope="row">{{ purchase.menu_item.name }}</th>
             <td>${{ purchase.menu_item.price }}</td>
             <td>{{ purchase.timestamp }}</td>
         </tr>

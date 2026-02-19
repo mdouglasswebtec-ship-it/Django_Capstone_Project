@@ -1,20 +1,23 @@
 {% extends "inventory/base.html" %}
 
+{% block title %}Restock Report | Django Delights{% endblock %}
+
 {% block content %}
 <h2>Restock Report</h2>
 <table>
+    <caption class="sr-only">Ingredient restock requirements compared with current stock levels.</caption>
     <thead>
         <tr>
-            <th>Ingredient</th>
-            <th>Required for One Full Menu</th>
-            <th>In Stock</th>
-            <th>Shortfall</th>
+            <th scope="col">Ingredient</th>
+            <th scope="col">Required for One Full Menu</th>
+            <th scope="col">In Stock</th>
+            <th scope="col">Shortfall</th>
         </tr>
     </thead>
     <tbody>
         {% for row in restock_rows %}
         <tr>
-            <td>{{ row.ingredient.name }}</td>
+            <th scope="row">{{ row.ingredient.name }}</th>
             <td>{{ row.required }}</td>
             <td>{{ row.ingredient.quantity }}</td>
             <td>{{ row.shortfall }}</td>
