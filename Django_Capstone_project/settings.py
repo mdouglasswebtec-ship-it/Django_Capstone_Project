@@ -31,8 +31,13 @@ if KEYSDIR.exists():
         project_keys = json.loads(key_file.read())
 
 
-def getKey(setting, project_keys=project_keys):
-    env_value = os.getenv(setting)
+def getKey(setting, project_keys=project_keys, env_aliases=None):
+    env_names = [setting] + list(env_aliases or [])
+    env_value = None
+    for env_name in env_names:
+        env_value = os.getenv(env_name)
+        if env_value:
+            break
     if env_value:
         return env_value
     try:
@@ -45,7 +50,7 @@ def getKey(setting, project_keys=project_keys):
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = getKey("SECRETKEY")
+SECRET_KEY = getKey("SECRETKEY", env_aliases=["SECRET_KEY"])
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() == "true"
