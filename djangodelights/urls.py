@@ -9,12 +9,10 @@ from inventory.forms import UsernameOrEmailAuthenticationForm
 
 urlpatterns = [
 	path("admin/", admin.site.urls),
-	# Keep auth routes explicit and simple for hosted environments.
-	# Use Django's default auth template path: registration/login.html
 	path(
 		"accounts/login/",
 		auth_views.LoginView.as_view(
-			template_name="admin/login.html",
+			template_name="registration/login.html",
 			authentication_form=UsernameOrEmailAuthenticationForm,
 		),
 		name="login",
