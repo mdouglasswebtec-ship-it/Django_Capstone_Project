@@ -9,5 +9,8 @@ project_env/
 # SQLite database
 *.sqlite3
 
+# Secret keys
+keys.json
+
 # OS files
 .DS_Store

@@ -92,3 +92,56 @@ git status
 git add <files>
 git commit -m "Add inventory models and migrations"
 ```
+
+## PythonAnywhere Deployment
+
+1. Clone project and create virtualenv:
+
+```
+cd ~
+git clone https://github.com/mdouglasswebtec-ship-it/Django-Capstone-Project.git
+cd Django-Capstone-Project
+mkvirtualenv --python=/usr/bin/python3.8 djangodelights
+workon djangodelights
+pip install -r requirements.txt
+```
+
+2. Add secret key file:
+
+```
+cat > /home/MatWebtec/Django-Capstone-Project/keys.json << 'EOF'
+{"SECRETKEY":"your-long-secret-key"}
+EOF
+```
+
+3. Run Django setup commands:
+
+```
+python manage.py migrate
+python manage.py collectstatic --noinput
+python manage.py check
+```
+
+4. Configure PythonAnywhere Web tab:
+
+- Source code: `/home/MatWebtec/Django-Capstone-Project`
+- Working directory: `/home/MatWebtec/Django-Capstone-Project`
+- Virtualenv: `/home/MatWebtec/.virtualenvs/djangodelights`
+- Static files mapping:
+	- URL: `/static/`
+	- Directory: `/home/MatWebtec/Django-Capstone-Project/staticfiles`
+
+5. Ensure environment variables (Web tab > Environment variables):
+
+```
+DJANGO_DEBUG=False
+DJANGO_ALLOWED_HOSTS=matwebtec.pythonanywhere.com
+```
+
+6. Reload web app.
+
+If deployment fails, check:
+
+```
+tail -n 80 /var/log/matwebtec.pythonanywhere.com.error.log
+```

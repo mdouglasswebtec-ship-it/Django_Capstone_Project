@@ -17,7 +17,7 @@ from .models import Ingredient, MenuItem, Purchase, RecipeRequirement
 
 @login_required
 def home(request):
-	return render(request, "inventory/home.html")
+	return render(request, "index.html")
 
 
 @login_required
