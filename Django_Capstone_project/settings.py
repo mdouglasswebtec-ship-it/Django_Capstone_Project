@@ -31,18 +31,17 @@ if KEYSDIR.exists():
         project_keys = json.loads(key_file.read())
 
 
-def getKey(setting, project_keys=project_keys, env_aliases=None):
+def getKey(setting, project_keys=project_keys, env_aliases=None, default=None):
     env_names = [setting] + list(env_aliases or [])
-    env_value = None
     for env_name in env_names:
         env_value = os.getenv(env_name)
         if env_value:
-            break
-    if env_value:
-        return env_value
+            return env_value
     try:
         return project_keys[setting]
     except KeyError:
+        if default is not None:
+            return default
         errorMessage = (
             "Set {} in environment or keys.json at {}".format(setting, KEYSDIR)
         )
@@ -50,7 +49,12 @@ def getKey(setting, project_keys=project_keys, env_aliases=None):
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = getKey("SECRETKEY", env_aliases=["SECRET_KEY"])
+# Fallback key is used when neither env var nor keys.json provides one.
+SECRET_KEY = getKey(
+    "SECRETKEY",
+    env_aliases=["SECRET_KEY"],
+    default="django-insecure-capstone-fallback-k3y-ch4ng3-m3-1n-pr0duct10n",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() == "true"
