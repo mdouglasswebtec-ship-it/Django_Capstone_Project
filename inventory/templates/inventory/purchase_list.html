@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>Purchases</h2>
-<p><a class="button" href="/purchases/add/">Record Purchase</a></p>
+<p><a class="button" href="{% url 'purchase_create' %}">Record Purchase</a></p>
 <table>
     <caption class="sr-only">Recorded menu item purchases with price and timestamp.</caption>
     <thead>

@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>Inventory</h2>
-<p><a class="button" href="/ingredients/add/">Add Ingredient</a></p>
+<p><a class="button" href="{% url 'ingredient_create' %}">Add Ingredient</a></p>
 <table>
     <caption class="sr-only">Ingredient inventory with quantities, prices, and actions.</caption>
     <thead>
@@ -23,8 +23,8 @@
             <td>${{ ingredient.unit_price }}</td>
             <td>
                 <div class="actions">
-                    <a class="button secondary" href="/ingredients/{{ ingredient.id }}/edit/" aria-label="Edit {{ ingredient.name }}">Edit</a>
-                    <form method="post" action="/ingredients/{{ ingredient.id }}/delete/">
+                    <a class="button secondary" href="{% url 'ingredient_update' ingredient.id %}" aria-label="Edit {{ ingredient.name }}">Edit</a>
+                    <form method="post" action="{% url 'ingredient_delete' ingredient.id %}">
                         {% csrf_token %}
                         <button class="button danger" type="submit" aria-label="Delete {{ ingredient.name }}">Delete</button>
                     </form>

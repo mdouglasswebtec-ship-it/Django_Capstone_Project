@@ -10,7 +10,7 @@
         <p class="sr-only">All form fields are required unless marked optional.</p>
         {{ form.as_p }}
         <button class="button" type="submit">Save</button>
-        <a class="button secondary" href="/ingredients/">Cancel</a>
+        <a class="button secondary" href="{% url 'ingredient_list' %}">Cancel</a>
     </form>
 </div>
 {% endblock %}
