@@ -68,6 +68,11 @@ ALLOWED_HOSTS = [
     if host.strip()
 ]
 
+# Django 4.x requires explicit trusted origins for CSRF over HTTPS.
+CSRF_TRUSTED_ORIGINS = [
+    "https://matwebtec.pythonanywhere.com",
+]
+
 
 # Application definition
 
