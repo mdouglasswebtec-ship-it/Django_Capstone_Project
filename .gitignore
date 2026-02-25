@@ -14,3 +14,6 @@ keys.json
 
 # OS files
 .DS_Store
+
+# Collected static files
+staticfiles/
