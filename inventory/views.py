@@ -2,7 +2,6 @@ from decimal import Decimal
 
 from django.contrib import messages
 from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect, render
@@ -30,30 +29,25 @@ def signup(request):
 	return render(request, "registration/signup.html", {"form": form})
 
 
-@login_required
 def home(request):
 	return render(request, "index.html")
 
 
-@login_required
 def ingredient_list(request):
 	ingredients = Ingredient.objects.all().order_by("name")
 	return render(request, "inventory/ingredient_list.html", {"ingredients": ingredients})
 
 
-@login_required
 def menu_list(request):
 	menu_items = MenuItem.objects.prefetch_related("recipe_requirements__ingredient").order_by("name")
 	return render(request, "inventory/menu_list.html", {"menu_items": menu_items})
 
 
-@login_required
 def purchase_list(request):
 	purchases = Purchase.objects.select_related("menu_item").order_by("-timestamp")
 	return render(request, "inventory/purchase_list.html", {"purchases": purchases})
 
 
-@login_required
 def report(request):
 	purchases = Purchase.objects.select_related("menu_item").prefetch_related(
 		"menu_item__recipe_requirements__ingredient"
@@ -77,7 +71,6 @@ def report(request):
 	return render(request, "inventory/report.html", context)
 
 
-@login_required
 def restock_report(request):
 	requirements = RecipeRequirement.objects.select_related("ingredient")
 	required_totals = {}
@@ -102,7 +95,6 @@ def restock_report(request):
 	return render(request, "inventory/restock_report.html", {"restock_rows": restock_rows})
 
 
-@login_required
 def ingredient_create(request):
 	if request.method == "POST":
 		form = IngredientForm(request.POST)
@@ -116,7 +108,6 @@ def ingredient_create(request):
 	return render(request, "inventory/ingredient_form.html", {"form": form, "title": "Add Ingredient"})
 
 
-@login_required
 def ingredient_update(request, ingredient_id):
 	ingredient = get_object_or_404(Ingredient, id=ingredient_id)
 	if request.method == "POST":
@@ -135,7 +126,6 @@ def ingredient_update(request, ingredient_id):
 	)
 
 
-@login_required
 def ingredient_delete(request, ingredient_id):
 	ingredient = get_object_or_404(Ingredient, id=ingredient_id)
 	if request.method == "POST":
@@ -144,7 +134,6 @@ def ingredient_delete(request, ingredient_id):
 	return redirect("ingredient_list")
 
 
-@login_required
 def menu_item_create(request):
 	if request.method == "POST":
 		form = MenuItemForm(request.POST)
@@ -158,7 +147,6 @@ def menu_item_create(request):
 	return render(request, "inventory/menu_item_form.html", {"form": form, "title": "Add Menu Item"})
 
 
-@login_required
 def recipe_requirement_create(request):
 	if request.method == "POST":
 		form = RecipeRequirementForm(request.POST)
@@ -176,7 +164,6 @@ def recipe_requirement_create(request):
 	)
 
 
-@login_required
 def purchase_create(request):
 	if request.method == "POST":
 		form = PurchaseForm(request.POST)

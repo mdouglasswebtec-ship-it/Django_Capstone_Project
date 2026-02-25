@@ -168,7 +168,3 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # WhiteNoise serves static files directly in production (no web-server mapping needed).
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
-
-LOGIN_URL = "login"
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "login"
